@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Single AJAX</title>
+</head>
+
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    // constructing a queryURL variable we will use instead of the literal string inside of the ajax method
+    var cocktailURLByName = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
+    var cocktailURLByFirstLetter = " https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a";
+    var cocktailURLByIngredient ="https://www.thecocktaildb.com/api/json/v1/1/search.php?i=vodka";
+    var cocktailURLRandom = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+  
+    var urlObj = {
+      name: cocktailURLByName,
+      firstLetter: cocktailURLByFirstLetter,
+      ingredient: cocktailURLByIngredient,
+      random: cocktailURLRandom
+    };
+    
+    $.ajax({
+      url: urlObj.name,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      // console.log(response.Runtime);
+    });
+
+    $.ajax({
+      url: urlObj.firstLetter,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      // console.log(response.Runtime);
+    });
+
+    $.ajax({
+      url: urlObj.ingredient,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      // console.log(response.Runtime);
+    });
+
+    $.ajax({
+      url: urlObj.random,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      // console.log(response.Runtime);
+    });
+
+  </script>
+
+</body>
+
+</html>
