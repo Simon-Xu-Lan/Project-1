@@ -8,19 +8,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-    <title>Mini mixologist</title>
-
+    <title>Mini Mixologist</title>
+    <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <!--load all styles -->
-
-
 
 </head>
 
 <body>
-
     <div class="navbar-fixed">
         <nav class="nav-wrapper brown">
             <div class="container">
@@ -42,47 +37,36 @@
         </nav>
     </div>
 
+    <div class="container">
+        <h2>Drink Options</h2>
+        <div class="row">
+            <div class="col s12 l6">
+                <div class="card">
+                    <!-- where the image link from the api will go -->
 
+                    <div class="card-image">
+                        <img src="img/curry.jpg" alt="">
+                        <!-- this button will allow clients to save previously made drinks -->
+                        <a href="" class="halfway-fab btn-floating pink pulse">
+                            <i class="material-icons">favorite</i>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <!-- this is where the name of the drink will go -->
+                        <span class="card-title">drink name</span>
+                    </div>
 
-
-
-    <ul class="sidenav" id="mobile-links">
-        <li><a href="">Home</a></li>
-        <li><a href="">about</a></li>
-        <li><a href="">Saved Drinks</a></li>
-        <li><a href="">Pair a Drink</a></li>
-    </ul>
-
-
-    <div class="row">
-        <div class="col s6 m3"></div>
-        <div class="col s12 m6 center">
-            <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                    <span class="card-title">Drink choice</span>
-                    <p>I am a very simple card. I am good at containing small bits of information.
-                        I am convenient because I require little markup to use effectively.</p>
+                    <div class="card-action">
+                        <a href="">Recipe</a>
+                    </div>
                 </div>
-                <form class="form">
-
-                </form>
             </div>
+
         </div>
-        <div class="col s6 m3"></div>
-    </div>
 
-
-
-
-    <!-- Compiled and minified JavaScript -->
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script> -->
-    <script>
-        $(document).ready(function () {
-            $('.sidenav').sidenav();
-        });
-    </script>
-    <script src="./script.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 </body>
 
 </html>
