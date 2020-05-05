@@ -3,7 +3,7 @@ var yesBtn = $(".yes")
 var noBtn = $(".no")
 var buttonsDiv = $(".yesOrNo")
 const APIKey = '9973533';
-const URL = 'https://www.thecocktaildb.com/api/json/v2/9973533/';
+const APIURL = 'https://www.thecocktaildb.com/api/json/v2/9973533/';
 
 // this is a full list of all recognized ingredients available in the cocktail API, as of 5/4/2020
 const ingredientList = ["Vodka", "Gin", "Rum", "Tequila", "Scotch", "Absolut Kurant", "Absolut Peppar", "Absolut Vodka", "Advocaat", "Aejo Rum", "Aftershock", "Agave Syrup", "Ale", "Allspice", "Almond Extract", "Almond Flavoring", "Almond", "Amaretto", "Angelica Root", "Angostura Bitters", "Anis", "Anise", "Anisette", "Aperol", "Apfelkorn", "Apple Brandy", "Apple Cider", "Apple Juice", "Apple Schnapps", "Apple", "Applejack", "Apricot Brandy", "Apricot Nectar", "Apricot", "Aquavit", "Asafoetida", "Alejo Rum", "Bacardi Limon", "Bacardi", "Baileys Irish Cream", "Banana Liqueur", "Banana Rum", "Banana Syrup", "Banana", "Barenjager", "Basil", "Beef Stock", "Beer", "Benedictine", "Berries", "Bitter lemon", "Bitters", "Black Pepper", "Black Rum", "Black Sambuca", "Blackberries", "Blackberry Brandy", "Blackberry Schnapps", "Blackcurrant Cordial", "Blackcurrant Schnapps", "Blackcurrant Squash", "Blended Whiskey", "Blue Curacao", "Blue Maui", "Blueberries", "Blueberry Schnapps", "Bourbon", "Brandy", "Brown Sugar", "Butter", "Butterscotch Schnapps", "Cachaca", "Calvados", "Campari", "Canadian Whisky", "Candy", "Cantaloupe", "Caramel Coloring", "Carbonated Soft Drink", "Carbonated Water", "Cardamom", "Cayenne Pepper", "Celery Salt", "Celery", "Chambord Raspberry Liqueur", "Champagne", "Cherries", "Cherry Brandy", "Cherry Cola", "Cherry Grenadine", "Cherry Heering", "Cherry Juice", "Cherry Liqueur", "Cherry", "Chocolate Ice-cream", "Chocolate Liqueur", "Chocolate Milk", "Chocolate Syrup", "Chocolate", "Cider", "Cinnamon Schnapps", "Cinnamon", "Citrus Vodka", "Clamato Juice", "Cloves", "Club Soda", "Coca-Cola", "Cocktail Onion", "Cocoa Powder", "Coconut Cream", "Coconut Liqueur", "Coconut Milk", "Coconut Rum", "Coconut Syrup", "Coffee Brandy", "Coffee Liqueur", "Coffee", "Cognac", "Cointreau", "Cola", "Cold Water", "Condensed Milk", "Coriander", "Corn Syrup", "Cornstarch", "Corona", "Cranberries", "Cranberry Juice", "Cranberry Liqueur", "Cranberry Vodka", "Cream of Coconut", "Cream Sherry", "Cream Soda", "Cream", "Creme De Almond", "Creme De Banane", "Creme De Cacao", "Creme De Cassis", "Creme De Noyaux", "Creme Fraiche", "Crown Royal", "Crystal Light", "Cucumber", "Cumin Powder", "Cumin Seed", "Curacao", "Cynar", "Daiquiri Mix", "Dark Chocolate", "Dark Creme De Cacao", "Dark Rum", "Dark Soy Sauce", "Demerara Sugar", "Dr. Pepper", "Drambuie", "Dried Oregano", "Dry Vermouth", "Dubonnet Blanc", "Dubonnet Rouge", "Egg White", "Egg Yolk", "Egg", "Eggnog", "Erin Cream", "Espresso", "Everclear", "Fanta", "Fennel Seeds", "Firewater", "Flaked Almonds", "Food Coloring", "Forbidden Fruit", "Frangelico", "Fresca", "Fresh Basil", "Fresh Lemon Juice", "Fruit Juice", "Fruit Punch", "Fruit", "Galliano", "Garlic Sauce", "Gatorade", "Ginger Ale", "Ginger Beer", "Ginger", "Glycerine", "Godiva Liqueur", "Gold rum", "Gold Tequila", "Goldschlager", "Grain Alcohol", "Grand Marnier", "Granulated Sugar", "Grape juice", "Grape soda", "Grapefruit Juice", "Grapes", "Green Chartreuse", "Green Creme de Menthe", "Green Ginger Wine", "Green Olives", "Grenadine", "Ground Ginger", "Guava juice", "Guinness stout", "Guinness", "Half-and-half", "Hawaiian punch", "Hazelnut liqueur", "Heavy cream", "Honey", "Hooch", "Hot Chocolate", "Hot Damn", "Hot Sauce", "Hpnotiq", "Ice-Cream", "Ice", "Iced tea", "Irish cream", "Irish Whiskey", "Jack Daniels", "Jello", "Jelly", "Jagermeister", "Jim Beam", "Johnnie Walker", "Kahlua", "Key Largo Schnapps", "Kirschwasser", "Kiwi liqueur", "Kiwi", "Kool-Aid", "Kummel", "Lager", "Lemon Juice", "Lemon Peel", "Lemon soda", "Lemon vodka", "Lemon-lime soda", "lemon-lime", "lemon", "Lemonade", "Licorice Root", "Light Cream", "Light Rum", "Lillet", "Lime juice cordial", "Lime Juice", "Lime liqueur", "Lime Peel", "Lime vodka", "Lime", "Limeade", "Madeira", "Malibu Rum", "Mandarin", "Mandarine napoleon", "Mango", "Maple syrup", "Maraschino cherry juice", "Maraschino Cherry", "Maraschino Liqueur", "Margarita mix", "Marjoram leaves", "Marshmallows", "Maui", "Melon Liqueur", "Melon Vodka", "Mezcal", "Midori Melon Liqueur", "Midori", "Milk", "Mint syrup", "Mint", "Mountain Dew", "Nutmeg", "Olive Oil", "Olive", "Onion", "Orange Bitters", "Orange Curacao", "Orange Juice", "Orange liqueur", "Orange Peel", "Orange rum", "Orange Soda", "Orange spiral", "Orange vodka", "Orange", "Oreo cookie", "Orgeat Syrup", "Ouzo", "Oyster Sauce", "Papaya juice", "Papaya", "Parfait amour", "Passion fruit juice", "Passion fruit syrup", "Passoa", "Peach brandy", "Peach juice", "Peach liqueur", "Peach Nectar", "Peach Schnapps", "Peach Vodka", "Peach", "Peachtree schnapps", "Peanut Oil", "Pepper", "Peppermint extract", "Peppermint Schnapps", "Pepsi Cola", "Pernod", "Peychaud bitters", "Pina colada mix", "Pineapple Juice", "Pineapple rum", "Pineapple vodka", "Pineapple-orange-banana juice", "Pineapple", "Pink lemonade", "Pisang Ambon", "Pisco", "Plain Chocolate", "Plain Flour", "Plums", "Port", "Powdered Sugar", "Purple passion", "Raisins", "Raspberry cordial", "Raspberry Jam", "Raspberry Juice", "Raspberry Liqueur", "Raspberry schnapps", "Raspberry syrup", "Raspberry Vodka", "Red Chile Flakes", "Red Chili Flakes", "Red Hot Chili Flakes", "Red Wine", "Rhubarb", "Ricard", "Rock Salt", "Root beer schnapps", "Root beer", "Roses sweetened lime juice", "Rosewater", "Rumple Minze", "Rye Whiskey", "Sake", "Salt", "Sambuca", "Sarsaparilla", "Schnapps", "Schweppes Lemon", "Schweppes Russchian", "Sherbet", "Sherry", "Sirup of roses", "Sloe Gin", "Soda Water", "Sour Apple Pucker", "Sour Mix", "Southern Comfort", "Soy Milk", "Soy Sauce", "Soya Milk", "Soya Sauce", "Spiced Rum", "Sprite", "Squeezed Orange", "Squirt", "Strawberries", "Strawberry juice", "Strawberry liqueur", "Strawberry Schnapps", "Strawberry syrup", "Sugar Syrup", "Sugar", "Sunny delight", "Surge", "Swedish punsch", "Sweet and Sour", "Sweet Cream", "Sweet Vermouth", "Tabasco Sauce", "Tang", "Tawny port", "Tea", "Tennessee whiskey", "Tequila rose", "Tia Maria", "Tomato Juice", "Tomato", "Tonic Water", "Triple Sec", "Tropicana", "Tuaca", "Vanilla extract", "Vanilla Ice-Cream", "Vanilla liqueur", "Vanilla schnapps", "Vanilla syrup", "Vanilla vodka", "Vanilla", "Vermouth", "Vinegar", "Water", "Watermelon schnapps", "Whipped Cream", "Whipping Cream", "White chocolate liqueur", "White Creme de Menthe", "White grape juice", "White port", "White Rum", "White Vinegar", "White Wine", "Wild Turkey", "Wildberry schnapps", "Wine", "Worcestershire Sauce", "Wormwood", "Yeast", "Yellow Chartreuse", "Yoghurt", "Yukon Jack", "Zima", "Caramel Sauce", "Chocolate Sauce", "Lillet Blanc", "Peach Bitters", "Mini-snickers bars", "Prosecco", "Salted Chocolate", "Martini Rosso", "Martini Bianco", "Martini Extra Dry", "Fresh Lime Juice", "Fresh Mint", "Rosemary", "Habanero Peppers", "Ilegal Joven mezcal", "Elderflower cordial", "Rosso Vermouth", "Creme de Violette", "Cocchi Americano", "White Vermouth", "Dry Curacao", "Nocino", "Averna", "Ramazzotti", "Fernet-Branca", "Allspice Dram", "Falernum", "Singani", "Arrack", "Blackstrap rum", "Ginger Syrup", "Honey syrup", "Blended Scotch", "Islay single malt Scotch", "151 proof rum", "7-up", "Absinthe", "Absolut citron", "Creme de Mure", "Olive Brine", "Pineapple Syrup", "St. Germain", "Lavender", "Whiskey", "Whisky"];
@@ -116,45 +116,36 @@ function autocomplete(inp, arr) {
 /*initiate the autocomplete function on the "myInput" element, and pass along the ingredients array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), ingredientList);
 
-// hiding the drinks card at the page load
+$("#search").on("click", searchForDrinks);
 
-drinksCard.hide()
+// query the database for drinks
+function searchForDrinks(event) {
+    event.preventDefault();
+    console.log($("#myInput").val());
+    console.log(APIURL + 'filter.php?i=' + $("#myInput").val());
 
-
-// logic for yes or no on landing page
-buttonsDiv.on("click", (event) => {
-    console.log(event.target);
-
-})
-
-
-{/* <div class="opt1">
-<label for="country">Country</label>
-<select id="country" name="country">
-    <option value="australia">Australia</option>
-    <option value="canada">Canada</option>
-    <option value="usa">USA</option>
-</select>
-</div> */}
-
-
-for (var i = 0; i < 4; i++) {
-    var wrapper = $("<div>")
-    wrapper.attr("class", "opt1")
-    var label = $("<label>")
-    label.attr("for", "drinks")
-    label.text("Drinks")
-    var select = $("<select>")
-    select.attr("id", "drink" + i)
-    select.attr("name", "drinks")
-    wrapper.append(label, select)
-    for (var j = 0; j < drinkList.length; j++) {
-        var option = $("<option>")
-        option.attr("value", drinkList[j])
-        option.text(drinkList[j])
-        select.append(option)
-    }
-    $(".form").append(wrapper)
-
-
+    $.ajax({
+        url: APIURL + 'filter.php?i=' + $("#myInput").val(),
+        type: "GET"
+    }).then(populateDrinkList);
 }
+
+function populateDrinkList(response) {
+    console.log(response);
+
+    for (i = 0; i < response.drinks.length; i++) {
+        let card = $('<div class="card col s4" style="width: 18rem;"></div>');
+        let image = $('<img class="card-img-top" src="' + response.drinks[i].strDrinkThumb + '" alt="Card image cap" > ');
+        let body = $('<div class="card-body"></div>');
+        let title = $('<h5 class="card-title">' + response.drinks[i].strDrink + '</h5>');
+
+        card.append(image, body, title);
+        $("#results").append(card);
+
+        if (i > 10) break; // 10 is the max we will display
+        console.log($("#results"));
+        console.log(card);
+    }
+
+};
+

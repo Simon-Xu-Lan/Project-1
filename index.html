@@ -21,47 +21,56 @@
 
 <body>
 
-    <div class="navbar-fixed">
-        <nav class="nav-wrapper brown">
-            <div class="container">
-                <a href="#" class="brand-logo center">Mini mixologist</a>
-                <a href="#" class="sidenav-trigger" data-target="mobile-links">
-                    <i class="material-icons">menu</i>
-                </a>
-                <ul class="right hide-on-med-and-down">
+    <div class="container">
 
-                    <li><a href="saved.html">Saved Drinks</a></li>
-                    <li><a href="pair.html">Pair a Drink</a></li>
-                </ul>
-                <ul class="left hide-on-med-and-down">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="">about</a></li>
-                </ul>
+        <div class="navbar-fixed">
+            <nav class="nav-wrapper brown">
+                <div class="container">
+                    <a href="#" class="brand-logo center">Mini mixologist</a>
+                    <a href="#" class="sidenav-trigger" data-target="mobile-links">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
 
-            </div>
-        </nav>
-    </div>
+                        <li><a href="saved.html">Saved Drinks</a></li>
+                        <li><a href="pair.html">Pair a Drink</a></li>
+                    </ul>
+                    <ul class="left hide-on-med-and-down">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="">about</a></li>
+                    </ul>
 
-
-
-
-
-    <ul class="sidenav" id="mobile-links">
-        <li><a href="">Home</a></li>
-        <li><a href="">about</a></li>
-        <li><a href="">Saved Drinks</a></li>
-        <li><a href="">Pair a Drink</a></li>
-    </ul>
-
-
-    <div class="row">
-        <div class="col s6">
-            <form autocomplete="off" action="">
-                <div class="autocomplete">
-                    <input id="myInput" type="text" name="ingredientChoice" placeholder="Type a drink ingredient...">
                 </div>
-                <input type="submit">
-            </form>
+            </nav>
+        </div>
+
+
+
+
+
+        <ul class="sidenav" id="mobile-links">
+            <li><a href="">Home</a></li>
+            <li><a href="">about</a></li>
+            <li><a href="">Saved Drinks</a></li>
+            <li><a href="">Pair a Drink</a></li>
+        </ul>
+
+
+        <div class="row">
+            <div class="col s6">
+                <form autocomplete="off" action="">
+                    <div class="autocomplete">
+                        <input id="myInput" type="text" name="ingredientChoice"
+                            placeholder="Type a drink ingredient...">
+                    </div>
+                    <input type="submit" id="search">
+                </form>
+            </div>
+        </div>
+
+
+        <div class="row" id="results">
+
         </div>
     </div>
 
