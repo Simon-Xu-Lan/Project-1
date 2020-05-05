@@ -6,11 +6,18 @@ body{
     background-position: center;
     min-height: 1000px;
 }
+.header{ padding-left: 25px;
 
+
+}
 .nav-wrapper{
 
     margin-bottom: 100px;
   
+
+}
+.drinkbtn{
+margin-bottom: 20px;
 
 }
 
@@ -24,7 +31,11 @@ body{
 
 }
 
+.recipe{
 
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+}
 
 
 .page-footer{

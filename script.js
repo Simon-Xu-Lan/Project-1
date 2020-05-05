@@ -3,6 +3,7 @@ var yesBtn = $(".yes")
 var noBtn = $(".no")
 var buttonsDiv = $(".yesOrNo")
 
+
 // hiding the drinks card at the page load
 
 drinksCard.hide()
@@ -46,3 +47,8 @@ for (var i = 0; i < 4; i++) {
 
 
 }
+
+
+
+
+
