@@ -136,9 +136,9 @@ function populateDrinkList(response) {
         let card = $('<div class="col m4 s6"></div>');
         let body = $('<div class="card">');
         let image = $('<div class="card-image"><img src="' + response.drinks[i].strDrinkThumb + '" class="responsive-img"></div>');
-        let title = $('<span class="card-title activator" data="' + response.drinks[i].idDrink + '">' + response.drinks[i].strDrink + '</span>');
+        let title = $('<span class="card-title activator" data-id="' + response.drinks[i].idDrink + '">' + response.drinks[i].strDrink + '</span>');
         // let content = $('<div class="card-content"></div>');
-        let reveal = $('<div class="card-reveal"><span class="card-title grey-text text-darken-4">' + + response.drinks[i].strDrink + '<i class="material-icons right">close</i></span><p id="card-reveal-content' + response.drinks[i].idDrink + '" data="monkey"></p></div>');
+        let reveal = $('<div class="card-reveal"><span class="card-title grey-text text-darken-4">' + response.drinks[i].strDrink + '<i class="material-icons right">close</i></span><p id="card-reveal-' + response.drinks[i].idDrink + '"></p></div>');
         title.on("click", populateReveal);
 
         image.append(title);
@@ -152,15 +152,28 @@ function populateDrinkList(response) {
 
 // on click, we make sure the content-reveal card has its proper content. We do this with another API call
 function populateReveal(event) {
-    let drinkID = event.target.data.val();
-    let node = $('#card-reveal-content' + drinkID);
-    console.log(drinkID);
-    console.log(node);
+    let drinkID = event.target.dataset.id;
+    let node = $('#card-reveal-' + drinkID);
+    if (node.text()) return; // don't repeat API alls for items that already have content in them
 
-    // $.ajax({
-    //     url: APIURL + 'filter.php?i=' + $("#myInput").val(),
-    //     type: "GET"
-    // }).then(populateDrinkList);
+    $.ajax({
+        url: APIURL + 'lookup.php?i=' + drinkID,
+        type: "GET"
+    }).then(function (response) {
+        let ingredientList = "";
+        for (i = 1; i < 16; i++) {
+            let m = response.drinks[0]['strIngredient' + i];
+            if (m === null) {
+                ingredientList = ingredientList.slice(0, ingredientList.length - 2);
+                ingredientList += '<br><br>';
+                break;
+            };
+            ingredientList += m + ', ';
+        }
+        node.html('<b>Ingredients:</b> ' + ingredientList + '<b>Instructions:</b> ' + response.drinks[0].strInstructions);
+        console.log(node);
+        console.log(response.drinks[0].strInstructions);
+    });
 
 }
 
