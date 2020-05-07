@@ -1,37 +1,11 @@
 body{
-    background-color: black;
-    background: url("./images/bar.jpg");
+    background-color: white;
     background-size: cover;
     background-position: center;
-    min-height: 1000px;
 }
 
-.nav-wrapper{
-    margin-bottom: 100px;
-}
-
-.row{
-    height: 400px;
-}
-
-
-.page-footer{
-   height: 100%;
-   padding: 100px;
-    }
-
-
-      .opt1{
-          width: 15%;
-      }
-      .form{
-          display: flex;
-          justify-content: space-around;
-      }
-
-
-      * {
-  box-sizing: border-box;
+.card-title {
+  text-shadow: 1px 1px 1px #000;
 }
 
 

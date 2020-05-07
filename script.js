@@ -121,8 +121,6 @@ $("#search").on("click", searchForDrinks);
 // query the database for drinks
 function searchForDrinks(event) {
     event.preventDefault();
-    console.log($("#myInput").val());
-    console.log(APIURL + 'filter.php?i=' + $("#myInput").val());
 
     $.ajax({
         url: APIURL + 'filter.php?i=' + $("#myInput").val(),
@@ -132,20 +130,37 @@ function searchForDrinks(event) {
 
 function populateDrinkList(response) {
     console.log(response);
+    $("#results").empty();
 
     for (i = 0; i < response.drinks.length; i++) {
-        let card = $('<div class="card col s4" style="width: 18rem;"></div>');
-        let image = $('<img class="card-img-top" src="' + response.drinks[i].strDrinkThumb + '" alt="Card image cap" > ');
-        let body = $('<div class="card-body"></div>');
-        let title = $('<h5 class="card-title">' + response.drinks[i].strDrink + '</h5>');
+        let card = $('<div class="col m4 s6"></div>');
+        let body = $('<div class="card">');
+        let image = $('<div class="card-image"><img src="' + response.drinks[i].strDrinkThumb + '" class="responsive-img"></div>');
+        let title = $('<span class="card-title activator" data="' + response.drinks[i].idDrink + '">' + response.drinks[i].strDrink + '</span>');
+        // let content = $('<div class="card-content"></div>');
+        let reveal = $('<div class="card-reveal"><span class="card-title grey-text text-darken-4">' + + response.drinks[i].strDrink + '<i class="material-icons right">close</i></span><p id="card-reveal-content' + response.drinks[i].idDrink + '" data="monkey"></p></div>');
+        title.on("click", populateReveal);
 
-        card.append(image, body, title);
+        image.append(title);
+        body.append(image, reveal); // content
+        card.append(body);
         $("#results").append(card);
 
-        if (i > 10) break; // 10 is the max we will display
-        console.log($("#results"));
-        console.log(card);
+        if (i >= 11) { break; } // 12 is the max number of cards we will display
     }
-
 };
+
+// on click, we make sure the content-reveal card has its proper content. We do this with another API call
+function populateReveal(event) {
+    let drinkID = event.target.data.val();
+    let node = $('#card-reveal-content' + drinkID);
+    console.log(drinkID);
+    console.log(node);
+
+    // $.ajax({
+    //     url: APIURL + 'filter.php?i=' + $("#myInput").val(),
+    //     type: "GET"
+    // }).then(populateDrinkList);
+
+}
 
