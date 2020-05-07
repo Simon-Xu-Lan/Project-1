@@ -54,19 +54,25 @@
 
 
         <div class="row">
-            <div class="col s6">
-                <form autocomplete="off" action="">
+            <form autocomplete="off" action="">
+                <div class="col s6">
+                    <label for="myInput"></label>
                     <div class="autocomplete">
                         <input id="myInput" type="text" name="ingredientChoice"
                             placeholder="Type a drink ingredient...">
                     </div>
+                </div>
+                <div class="col s6">
                     <input type="submit" id="search" value="search">
-                    <input type="reset" id="clear">
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
 
-        <!-- This will be filled in by script.js after a query -->
+        <!-- This will be filled in by script.js after a query. It will contain the search terms -->
+        <div class="row" id="query">
+        </div>
+
+        <!-- This will be filled in by script.js after a query. It will contain the search resutls -->
         <div class="row" id="results">
         </div>
 

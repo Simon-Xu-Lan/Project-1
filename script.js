@@ -116,7 +116,15 @@ function autocomplete(inp, arr) {
 /*initiate the autocomplete function on the "myInput" element, and pass along the ingredients array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), ingredientList);
 
-$("#search").on("click", searchForDrinks);
+$("#search").on("click", searchForDrinks); // the submit button will start the search query
+
+$("#myInput").on("keydown", function (e) { // the enter button wills start the search query
+    if (!$("#myInput").val()) return;
+    if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        searchForDrinks(e);
+    }
+});
 
 // query the database for drinks
 function searchForDrinks(event) {
@@ -130,10 +138,21 @@ function searchForDrinks(event) {
 
 function populateDrinkList(response) {
     console.log(response);
-    $("#results").empty();
+    $("#results").empty(); // reset the results div
+    $("#query").empty();
+
+    let searchNode = $('<div><b>Ingredient: ' + $("#myInput").val() + '</b></div>');
+    $("#query").append(searchNode); // list the input field's contents in the UI
+    $("#myInput").val(''); // reset the input field after submit
+
+    if (response.drinks == "None Found") { // the query failed to return any results
+        let card = $('<div class="col m4 s6"><h5>No drinks found</h5></div>');
+        $("#results").append(card);
+        return;
+    };
 
     for (i = 0; i < response.drinks.length; i++) {
-        let card = $('<div class="col m4 s6"></div>');
+        let card = $('<div class="col l4 m6 s12"></div>');
         let body = $('<div class="card">');
         let image = $('<div class="card-image"><img src="' + response.drinks[i].strDrinkThumb + '" class="responsive-img"></div>');
         let title = $('<span class="card-title activator" data-id="' + response.drinks[i].idDrink + '">' + response.drinks[i].strDrink + '</span>');
