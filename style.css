@@ -2,6 +2,7 @@ body{
   background: url("./images/bar.jpg");
   background-attachment: fixed;
   min-height: 1000px;
+  background-size: cover;
 
   background-position: center;
 }
