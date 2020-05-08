@@ -3,12 +3,11 @@ var yesBtn = $(".yes")
 var noBtn = $(".no")
 var buttonsDiv = $(".yesOrNo")
 const APIKey = '9973533';
-const APIURL = 'https://www.themealdb.com/api/json/v2/9973533/';
+const APIURL = 'https://www.thecocktaildb.com/api/json/v2/9973533/';
 
 /*the autocomplete function takes two arguments: the text field element and an array of possible autocompleted values:*/
 function autocomplete(inp, arr) {
     var currentFocus;
-
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function (e) {
         var a, b, i, val = this.value;
@@ -107,21 +106,48 @@ function autocomplete(inp, arr) {
     });
 }
 
-$("#myInput").on("input", function() {
+function intersection(arr1, arr2){
+    //the function intersection returns the intersection between arr1 and arr2
+        var l1 = arr1.length;
+        var l2 = arr2.length;
+        var commons = [];
+        for(var i=0; i<l1; i++){
+            for (var j=0; j<l2; j++) {
+            if(JSON.stringify(arr1[i]) === JSON.stringify(arr2[j])) {
+                commons.push(arr1[i]);
+            };
+            };
+        };
+        return commons;
+    };
+
+$(document).on("input", ".myInput", function() {
     // var input = $(this).val();
-    var queryURl = "https://www.themealdb.com/api/json/v1/1/list.php?i=list";
+    var inputEl = event.target;
+    var queryURL = "https://www.themealdb.com/api/json/v1/1/list.php?" 
+        + $(this).attr("id").charAt(0).toLowerCase()
+        + "=list";
+    var idName = $(this).attr("id"); //🍊why $(this).attr("id") doesn't work inside then
+    // var strName = "str" + $(this).attr("id"); 🍊🍊why strName works here but doesn't work in autocomplete
     var list = [];
     $.ajax({
-        url: queryURl,
+        url: queryURL,
         method: "GET"
     }).then(function(response) {
+        // console.log($(this).attr("id")) //🍊why $(this).attr("id") doesn't work inside then
         var n = response.meals.length;
         for(i=0; i<n; i++) {
-            list.push(response.meals[i].strIngredient);
+            // list.push(response.meals[i].strName); 🍊🍊why strName works here but doesn't work in autocomplete
+            
+            if(idName === "Ingredient") {
+                list.push(response.meals[i].strIngredient);
+            } else {
+                list.push(response.meals[i].strArea);
+            }
         };
         /*initiate the autocomplete function on the "myInput" element, and pass along 
         the ingredients array as possible autocomplete values:*/
-        autocomplete(document.getElementById("myInput"), list);
+        autocomplete(inputEl, list);
     });
 });
     
@@ -136,48 +162,104 @@ $("#myInput").on("keydown", function (e) { // the enter button wills start the s
     }
 });
 
-// query the database for drinks
+
+// the submit button will start the search query
 function searchForMeals(event) {
     event.preventDefault();
+    //get the elements of class ".input-group" and assign them to inputEls
+    var inputEls = $(".myInput")
+    var urlArr = [];
+    for(var i=0; i<inputEls.length; i++) {
+        if(inputEls[i].value) { 
+            
+            var qURL = "https://www.themealdb.com/api/json/v1/1/filter.php?"
+            //get first letter of ID name
+            + inputEls[i].id.charAt(0).toLowerCase() 
+            + "="
+            //get the value of the input
+            + inputEls[i].value;
+            //put the url to the urlArr array.
 
-    $.ajax({
-        url: "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + $("#myInput").val(),
-        type: "GET"
-    }).then(populateMealList);
-}
+            urlArr.push(qURL)
+        };
+    };
+    // set the level at 0
+    var l = 0;
+    if(!urlArr[l]) {
+        let card = $('<div class="col m4 s6"><h5>Please check the input</h5></div>');
+        $("#results").append(card);
+    } else {
+        $.ajax({
+            url: urlArr[l],
+            method: "GET"
+        }).then(function(response0) {
+            var result = response0.meals;
+            console.log("0",result)
+            l++;
+            if(!urlArr[l]) {
+                // resultOfMeals("meals",result);
+                populateMealList(result); //🍏
+            } else {
+                $.ajax({
+                    url: urlArr[l],
+                    method: "GET"
+                }).then(function(response1) {
+                    result = intersection(result,response1.meals);
+                    console.log("1",result)
+                    // resultOfMeals("meals",result);
+                    populateMealList(result);
 
-function populateMealList(response) {
-    console.log(response);
+                }); //end of level 1
+            }
+        }); //end of level 0
+    }
+}; //end of "search"
+
+
+
+
+// query the database for drinks
+// function searchForMeals(event) {
+//     event.preventDefault();
+
+//     $.ajax({
+//         url: "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + $("#myInput").val(),
+//         type: "GET"
+//     }).then(populateMealList);
+// }
+
+function populateMealList(list) {
     $("#results").empty(); // reset the results div
     $("#query").empty();
 
-    let searchNode = $('<div><b>Ingredient: ' + $("#myInput").val() + '</b></div>');
-    $("#query").append(searchNode); // list the input field's contents in the UI
-    $("#myInput").val(''); // reset the input field after submit
-
-    if (response.meals == "None Found") { // the query failed to return any results
+    // let searchNode = $('<div><b>Ingredient: ' + $("#myInput").val() + '</b></div>');
+    // $("#query").append(searchNode); // list the input field's contents in the UI
+    // $("#myInput").val(''); // reset the input field after submit
+    console.log(list.length)
+    if (list.length === 0) { // the query failed to return any results
         let card = $('<div class="col m4 s6"><h5>No meals found</h5></div>');
         $("#results").append(card);
-        return;
-    };
+    } else {
+        for (i = 0; i < list.length; i++) {
+            let card = $('<div class="col l4 m6 s12"></div>');
+            let body = $('<div class="card">');
+            let image = $('<div class="card-image"><img src="' + list[i].strMealThumb + '" class="responsive-img"></div>');
+            let title = $('<span class="card-title activator" data-id="' + list[i].idMeal + '">' + list[i].strMeal + '</span>');
+            // let content = $('<div class="card-content"></div>');
+            let reveal = $('<div class="card-reveal"><span class="card-title grey-text text-darken-4">' + list[i].strMeal + '<i class="material-icons right">close</i></span><p id="card-reveal-' + list[i].idMeal + '"></p></div>');
+            // document.on("click",image, populateReveal);
+            title.on("click", populateReveal);
+    
+            image.append(title);
+            body.append(image, reveal); // content
+            card.append(body);
+            $("#results").append(card);
+    
+            // if (i >= 11) { break; } // 12 is the max number of cards we will display
+        }
 
-    for (i = 0; i < response.meals.length; i++) {
-        let card = $('<div class="col l4 m6 s12"></div>');
-        let body = $('<div class="card">');
-        let image = $('<div class="card-image"><img src="' + response.meals[i].strMealThumb + '" class="responsive-img"></div>');
-        let title = $('<span class="card-title activator" data-id="' + response.meals[i].idMeal + '">' + response.meals[i].strMeal + '</span>');
-        // let content = $('<div class="card-content"></div>');
-        let reveal = $('<div class="card-reveal"><span class="card-title grey-text text-darken-4">' + response.meals[i].strMeal + '<i class="material-icons right">close</i></span><p id="card-reveal-' + response.meals[i].idMeal + '"></p></div>');
-        // document.on("click",image, populateReveal);
-        title.on("click", populateReveal);
-
-        image.append(title);
-        body.append(image, reveal); // content
-        card.append(body);
-        $("#results").append(card);
-
-        if (i >= 11) { break; } // 12 is the max number of cards we will display
     }
+
 };
 
 // on click, we make sure the content-reveal card has its proper content. We do this with another API call
