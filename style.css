@@ -1,10 +1,10 @@
-body{      
-  background: url("./images/bar.jpg");
-  background-attachment: fixed;
-  min-height: 1000px;
-  background-size: cover;
-
-  background-position: center;
+body{
+    background-color: black;
+    background: url("./images/bar.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 1000px;
 }
 
 .activator {
