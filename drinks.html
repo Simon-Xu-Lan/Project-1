@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-    <title>Mini Meal Maker</title>
+    <title>Mini mixologist</title>
 
     <link rel="stylesheet" href="style.css">
     <!--load all styles -->
@@ -24,31 +24,39 @@
         <nav class="nav-wrapper brown darken-2">
             <div class="container">
                 <div class="row">
-                    <a href="#" class="brand-logo center center-align hide-on-small-only ">Mini mixologist</a>
+                    <a href="#" class="brand-logo center hide-on-small-only">Mini mixologist</a>
                     <a href="#" class="sidenav-trigger" data-target="mobile-links">
                         <i class="material-icons">menu</i>
                     </a>
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="meal.html">Saved Drinks</a></li>
+
+                        <li><a href="meal3c.html">Make a meal</a></li>
+                        <!-- <li><a href="pair.html">Pair a Drink</a></li> -->
                     </ul>
                     <ul class="left hide-on-med-and-down">
-                        <li><a href="drinks.html">Home</a></li>
+                        <li><a href="drinks.html">Make a Drink</a></li>
+                        <!-- <li><a href="">about</a></li> -->
                     </ul>
 
                 </div>
+            </div>
+
         </nav>
     </div>
 
 
+
+
+
     <ul class="sidenav" id="mobile-links">
-        <li><a href="index.html">Home</a></li>
         <li><a href="drinks.html">Make a Drink</a></li>
-        <li><a href="meal.html">Make a Meal</a></li>
+        <li><a href="meal3c.html">Make a Meal</a></li>
     </ul>
+    </div>
 
-    <!-- <div class="container">
 
-        <div class="row">
+
+    <!-- <div class="row">
             <div class="navbar-fixed1">
                 <nav class="nav-wrapper brown">
 
@@ -66,7 +74,7 @@
                     </ul>
 
                     <ul class="right hide-on-med-and-down s3 l6">
-                        <li><a href="drinks.html">Mix a Drink</a></li>
+                        <li><a href="drinks.html">Pair a Drink</a></li>
                     </ul>
 
 
@@ -75,30 +83,45 @@
         </div>
     </div>
 
+
+
     <ul class="sidenav" id="mobile-links">
         <li><a href="">Make a Meal</a></li>
         <li><a href="">Mix a Drink</a></li>
-    </ul> -->
+    </ul> --> -->
+
+
+
+
+
 
     <div class="container">
 
         <div class="row">
-            <div class="col s1  m1 l2"></div>
-            <div class="col s10 m10 l8 center">
+            <div class="col s1  m1 l0"></div>
+            <div class="col s10 m10 l12 center">
                 <div class="card grey darken-2">
                     <div class="card-content white-text center-text">
-                        <span class="card-title">Lets cook a meal!</span>
+                        <span class="card-title">Lets craft a cocktail</span>
                         <div class="cardtext">
-                            <div class="black-text"> Welcome to Craft Your Meal App.
-                                This app will turn the average Joe in to a michellin star chef in just a few clicks.
-                                Below you will be able to select the main ingredient for your dish.
-                                We will generate a list of possible dishes for you to prepare.
-                                With simple step by step instructions to guide you along the entire time.</div>
+                            <div class="black-text"> Welcome to Mini Mixologist.
+                                This app will turn the average Joe in to a master mixologist in just a few
+                                clicks.
+                                Below you will be able select a combination of whatever alcohols you wish to
+                                combine.
+                                After you make your we will generate a list of all possible cocktails that are
+                                available to
+                                you
+                                with a simple step by step guide that will teach you to turn your dusty old
+                                bottles
+                                into
+                                carefully crafted libations.</div>
 
-                            Please enter the main ingredient for your meal into the box below.
+                            You may select up to four ingredients in the drop down menus below.
                             When you are satisfied with your choices select make my drink and we will show you a
                             list of
                             options for you to chose from.
+                            <h6>Please drink responsibly.</h6>
                         </div>
                     </div>
                     <form class="form">
@@ -112,11 +135,9 @@
                                 <label for="myInput"></label>
                                 <div class="autocomplete">
                                     <input id="myInput" type="text" name="ingredientChoice"
-                                        placeholder="Type a meal ingredient...">
+                                        placeholder="Type a drink ingredient...">
                                 </div>
                             </div>
-
-
                             <div class="brownbtn">
                                 <div class="col s1 m6">
                                     <div class="searchbutton btn-large  brown left darken-2 waves-effect waves-light "
@@ -134,11 +155,9 @@
                                 </div>
                             </div>
 
-
-
-
                         </form>
                     </div>
+
 
                     <!-- This will be filled in by script.js after a query. It will contain the search terms -->
                     <div class="row" id="query">
@@ -150,19 +169,19 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+
+        </div>
 
 
 
-
-                    <!-- Compiled and minified JavaScript -->
-
-                    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script> -->
-                    <script>
-                        $(document).ready(function () {
-                            $('.sidenav').sidenav();
-                        });
-                    </script>
-                    <script src="./meal2.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.sidenav').sidenav();
+            });
+        </script>
+        <script src="./script.js"></script>
 </body>
 
 </html>
