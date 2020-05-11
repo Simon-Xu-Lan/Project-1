@@ -292,7 +292,7 @@
 
         //the array below is for test.
         $("#i-Input-Start").on("input", function() {
-            var input = $(this).val();
+            // var input = $(this).val();
             var queryURl = "https://www.themealdb.com/api/json/v1/1/list.php?i=list";
             var list = [];
             $.ajax({
@@ -304,11 +304,6 @@
                     list.push(response.meals[i].strIngredient);
                 };
                 autocomplete("i-Input-Start", list, "start");
-                // var listFiltered = filterList(input, list);
-                // for(i=0; i<listFiltered.length; i++) {
-                //     var item = $("<p>").text(listFiltered[i]);
-                //     $("#search-result").prepend(item);
-                // }
             });
         });
 
@@ -404,10 +399,8 @@
                             url: urlArr[l],
                             method: "GET"
                         }).then(function(response1) {
-                            console.log("test1",result)
                             result = intersection(result,response1.meals);
 
-                            console.log("test2",result)
                             l++;
                             if(!urlArr[l]) {
                                 resultOfMeals("meals",result);
@@ -450,9 +443,10 @@
                     d.attr("class","meals-result");
                     var nameEl = $("<p>");
                     var imageEl = $("<img>");
-                    var infoEl = $("<p>");
+                    var infoEl = $("<div>");
                     nameEl.text(list[i].strMeal);
                     imageEl.attr("src", list[i].strMealThumb);
+                    imageEl.attr("class","meals-image");
                     infoEl.text("More information");
                     infoEl.attr("data-idmeal", list[i].idMeal);
                     infoEl.attr("class","meal-info");
@@ -462,8 +456,16 @@
             };            
         };
 
-        $(".meal-info").on("click",function() {
-            console.log($(this.text()))
+        $(document).on("click",".meal-info",function() {
+            console.log(typeof $(this).attr("data-idmeal"))
+            var idURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=
+            + $(this).attr("data-idmeal")
+            $.ajax({
+                url: idURL,
+                method: "GET"
+            }).then(function(response) {
+
+            })
         });
     </script>
 </body>
